@@ -5,3 +5,11 @@ CREATE TABLE IF NOT EXISTS `customers` (
     `surname` VARCHAR(40) NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
+DROP TABLE IF EXISTS `items`;
+CREATE TABLE IF NOT EXISTS `items` (
+    `item_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(40) NULL DEFAULT NULL,
+    `category` VARCHAR(40) NULL DEFAULT NULL,
+    `price` FLOAT NULL DEFAULT NULL,
+    PRIMARY KEY (`item_id`)
+);
