@@ -4,17 +4,18 @@ public class Item {
 	
 	private Long item_id;
 	private String name;
+	private String category;
 	private float price;
 	
-	public Item (String name, float price) {
+	public Item (String name, String category) {
 		this.setName(name);
-		this.setPrice(price);		
+		this.setCategory(category);;		
 	}
 	
-	public Item (Long item_id, String name, float price) {
+	public Item (Long item_id, String name, String category) {
 		this.setItem_id(item_id);
 		this.setName(name);
-		this.setPrice(price);		
+		this.setCategory(category);		
 	}
 
 	public Long getItem_id() {
@@ -33,6 +34,16 @@ public class Item {
 		this.name = name;
 	}
 
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+
 	public float getPrice() {
 		return price;
 	}
@@ -40,10 +51,10 @@ public class Item {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "item id: "+ item_id + " name: " + name + " price: " + price; 
+		return "item id: "+ item_id + " name: " + name + " category: " + category; 
 	}
 	
 	@Override
@@ -52,34 +63,35 @@ public class Item {
 		int result = 2;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
-		//result = prime * result + ((price == 0) ? 0 : price.hashCode()); Primitive types do not have methods
+		result = prime * result + ((category == null) ? 0 : category.hashCode()); 
 		return result;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		//What does this THIS refers to?
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
-		//Ask what is this doing
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Item other = (Item) obj;
+		if (getName() == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!getName().equals(other.getName()))
+			return false;
 		if (item_id == null) {
-			if (other.item_id != null) return false;
-		}	
-			else if (!item_id.equals(other.item_id)) return false;
-		
-		if (name == null) {
-			if (other.name != null) return false; 
-		}
-		else if (!name.equals(other.name)) return false;
-		
-		if (getPrice()==0) {
-			if (other.getPrice() != 0) return false;		
-		}
-		else if (!(price == other.price)) return false;
-		
-		return true;		
+			if (other.item_id != null)
+				return false;
+		} else if (!item_id.equals(other.item_id))
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
+		return true;
 	}
 
 }

@@ -35,16 +35,7 @@ public class Utils {
 	//Added getFloat() --> if it doesn't work delete it
 	
 	public Float getFloat() {
-		String input = getString();
-		float floatInput = 0;
-		do {
-			try {
-				floatInput = Integer.parseInt(input);
-			} catch (NumberFormatException nfe) {
-				LOGGER.info("Error - Please enter a number");
-			}
-		} while (floatInput == 0);
-		return floatInput;
+		return scanner.nextFloat();
 	}
 
 	public String getString() {
