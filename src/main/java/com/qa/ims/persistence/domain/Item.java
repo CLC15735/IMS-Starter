@@ -7,15 +7,17 @@ public class Item {
 	private String category;
 	private float price;
 	
-	public Item (String name, String category) {
+	public Item (String name, String category, Float price) {
 		this.setName(name);
-		this.setCategory(category);;		
+		this.setCategory(category);
+		this.setPrice(price);
 	}
 	
-	public Item (Long item_id, String name, String category) {
+	public Item (Long item_id, String name, String category, Float price) {
 		this.setItem_id(item_id);
 		this.setName(name);
-		this.setCategory(category);		
+		this.setCategory(category);	
+		this.setPrice(price);
 	}
 
 	public Long getItem_id() {
@@ -54,7 +56,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "item id: "+ item_id + " name: " + name + " category: " + category; 
+		return "item id: "+ item_id + " name: " + name + " category: " + category + " price: " + price; 
 	}
 	
 	@Override
@@ -90,6 +92,11 @@ public class Item {
 			if (other.category != null)
 				return false;
 		} else if (!category.equals(other.category))
+			return false;
+		if (price == 0) {
+			if (other.price != 0)
+				return false;
+		} else if (!(price == other.price))
 			return false;
 		return true;
 	}

@@ -48,7 +48,9 @@ public class ItemController implements CrudController<Item> {
 		String name = utils.getString();
 		LOGGER.info("Please enter the category of the item");
 		String category = utils.getString();
-		Item item = itemDAO.create(new Item(name,category));
+		LOGGER.info("Please enter the price of the item");
+		Float price = utils.getFloat();
+		Item item = itemDAO.create(new Item(name,category, price));
 		LOGGER.info("Item created");
 		return item;
 	}
@@ -64,7 +66,9 @@ public class ItemController implements CrudController<Item> {
 		String name = utils.getString();
 		LOGGER.info("Please enter the category of the item");
 		String category = utils.getString();
-		Item item = itemDAO.update(new Item(item_id, name, category));
+		LOGGER.info("Please enter the price of the item");
+		Float price = utils.getFloat();
+		Item item = itemDAO.update(new Item(item_id, name, category, price));
 		LOGGER.info("Item Updated");
 		return item;
 	}
