@@ -66,6 +66,7 @@ public class Item {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode()); 
+		result = prime * result + ((price == +0f) ? 0 : Float.floatToIntBits(price));
 		return result;
 	}
 	
@@ -96,7 +97,7 @@ public class Item {
 		if (price == 0) {
 			if (other.price != 0)
 				return false;
-		} else if (!(price == other.price))
+		} else if (!(Float.compare(price,other.price) == 0))
 			return false;
 		return true;
 	}
