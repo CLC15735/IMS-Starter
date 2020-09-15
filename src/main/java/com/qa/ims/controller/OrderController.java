@@ -1,5 +1,6 @@
 package com.qa.ims.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -45,15 +46,22 @@ public class OrderController implements CrudController<Order> {
 	public Order create() {
 		LOGGER.info("Please enter the customer id");
 		Long customer_id = utils.getLong();
-		LOGGER.info("Please enter the item id you would like to add to the order");
-		Long item_id = utils.getLong();
+		Boolean addItem = true;
+		List<Long> item_id = new ArrayList <>();
+		while (addItem) {
+			LOGGER.info("Would you like to add an item to the order? ");			
+			if (utils.getString() == "yes") {
+				LOGGER.info("Please enter the item id you would like to add to the order");
+				item_id.add(utils.getLong());
+			} else addItem = false;		
+		}
 		Order order = orderDAO.create(new Order(customer_id, item_id));
 		LOGGER.info("Order placed");
 		return order;
 	}
 	
 	/**
-	 * Updates an existing customer by taking in user input
+	 * Updates an existing order by taking in user input
 	 */
 	@Override
 	public Order update() {
@@ -61,8 +69,17 @@ public class OrderController implements CrudController<Order> {
 		Long order_id = utils.getLong();
 		LOGGER.info("Please enter a customer id");
 		Long customer_id = utils.getLong();
-		LOGGER.info("Please enter an item id");
-		Long item_id = utils.getLong();
+		List<Long> item_id = new ArrayList <>();
+		Boolean addItem = true;
+		while (addItem) {
+			LOGGER.info("Would you like to add an item to the order? ");
+			String addOrNot = utils.getString();
+			if (addOrNot == "yes") {
+				LOGGER.info("Please enter the item id you would like to add to the order");
+				item_id.add(utils.getLong());
+			} else addItem = false;	
+		}
+		
 		Order order = orderDAO.update(new Order(order_id, customer_id, item_id));
 		LOGGER.info("Order Updated");
 		return order;

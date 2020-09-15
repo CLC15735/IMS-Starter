@@ -1,17 +1,22 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 	
+
+	private List<Long> item_id = new ArrayList <>();
+	//Each order can have a number of items, and each item can be in a number of orders
 	private Long order_id;
 	private Long customer_id;
-	private Long item_id;
 	
-	public Order (Long customer_id, Long item_id) {
+	public Order (Long customer_id, List<Long> item_id) {
 		this.customer_id = customer_id;
 		this.item_id = item_id;
 	}
 	
-	public Order (Long order_id ,Long customer_id, Long item_id) {
+	public Order (Long order_id ,Long customer_id, List<Long> item_id) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.item_id = item_id;
@@ -33,17 +38,21 @@ public class Order {
 		this.customer_id = customer_id;
 	}
 
-	public Long getItem_id() {
+		
+	public List<Long> getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(Long item_id) {
+	public void setItem_id(List<Long> item_id) {
 		this.item_id = item_id;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "order ID: " + order_id + " customer reference: " + customer_id + " item reference: " + item_id;
+		String message = "order ID: " + order_id + " customer reference: " + customer_id + " item reference: " ;
+		for (Long i : item_id) message += i + ", ";
+		
+		return message;
 	}
 	
 	@Override
@@ -52,7 +61,7 @@ public class Order {
 		int result = 1;
 		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
 		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
-		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
 		return result;
 	}
 	
