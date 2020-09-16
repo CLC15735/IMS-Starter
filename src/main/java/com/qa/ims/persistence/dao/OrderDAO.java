@@ -39,13 +39,14 @@ public class OrderDAO implements Dao<Order> {
 	public List<Order> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
+				//ResultSet resultSet = statement.executeQuery("SELECT o.order_id, o.customer_id, oi.item_id, price FROM orders o JOIN orders_items oi JOIN items ON o.order_id = oi.order_id AND oi.item_id = items.item_id");)
 				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, o.customer_id, oi.item_id FROM orders o JOIN orders_items oi ON o.order_id = oi.order_id");) {
-			List<Order> order = new ArrayList<>();
-			while (resultSet.next()) {
-				order.add(modelFromResultSet(resultSet));
-			}
-			return order;
-		} catch (SQLException e) {
+					List<Order> order = new ArrayList<>();
+						while (resultSet.next()) {
+							order.add(modelFromResultSet(resultSet));
+						}
+					return order;
+				} catch (SQLException e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
@@ -55,7 +56,7 @@ public class OrderDAO implements Dao<Order> {
 	public Order readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, customer_id, item_id FROM orders o JOIN orders_items ORDER BY o.order_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -79,9 +80,9 @@ public class OrderDAO implements Dao<Order> {
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY order_id DESC LIMIT 1");
 			resultSet.next();
 			Long order_id = resultSet.getLong("order_id");
-			
+
 			for (int i=0; i<order.getItem_id().size(); i++) {
-				statement.executeUpdate("INSERT INTO orders_items(order_id, item_id) VALUES ('" + order_id + "'" + order.getItem_id().get(i) + "')");
+				statement.executeUpdate("INSERT INTO orders_items(order_id, item_id) VALUES ('" + order_id + "','" + order.getItem_id().get(i) + "')");
 			}
 			
 			return readLatest();

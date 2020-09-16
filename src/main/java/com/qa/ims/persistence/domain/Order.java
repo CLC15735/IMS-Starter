@@ -8,20 +8,23 @@ public class Order {
 
 	private List<Long> item_id = new ArrayList <>();
 	//Each order can have a number of items, and each item can be in a number of orders
+	
 	private Long order_id;
 	private Long customer_id;
 	
 	public Order (Long customer_id, List<Long> item_id) {
 		this.customer_id = customer_id;
 		this.item_id = item_id;
+		
 	}
 	
-	public Order (Long order_id ,Long customer_id, List<Long> item_id) {
+	public Order (Long order_id, Long customer_id, List<Long> item_id) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.item_id = item_id;
+		
 	}
-
+	
 	public Long getOrder_id() {
 		return order_id;
 	}
@@ -46,12 +49,16 @@ public class Order {
 	public void setItem_id(List<Long> item_id) {
 		this.item_id = item_id;
 	}
-
+	
+	
 	@Override
 	public String toString() {
-		String message = "order ID: " + order_id + " customer reference: " + customer_id + " item reference: " ;
-		for (Long i : item_id) message += i + ", ";
 		
+		String message = "order ID: " + order_id + " customer reference: " + customer_id + " item id: ";
+		for (Long i : item_id ) {	
+			message += i;
+			}
+			
 		return message;
 	}
 	
@@ -62,6 +69,7 @@ public class Order {
 		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
 		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
+
 		return result;
 	}
 	
@@ -92,6 +100,7 @@ public class Order {
 				return false;
 		} else if (!item_id.equals(other.item_id))
 			return false;
+
 		
 		return true;
 	}

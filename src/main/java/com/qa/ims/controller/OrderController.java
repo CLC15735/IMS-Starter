@@ -48,12 +48,17 @@ public class OrderController implements CrudController<Order> {
 		Long customer_id = utils.getLong();
 		Boolean addItem = true;
 		List<Long> item_id = new ArrayList <>();
+		String anotherItem = "";
 		while (addItem) {
-			LOGGER.info("Would you like to add an item to the order? ");			
-			if (utils.getString() == "yes") {
-				LOGGER.info("Please enter the item id you would like to add to the order");
-				item_id.add(utils.getLong());
-			} else addItem = false;		
+			LOGGER.info("Please enter the item id you would like to add to the order ");
+			item_id.add(utils.getLong());
+			
+			LOGGER.info("Would you like to add another item? ");
+			anotherItem = utils.getString();
+			if (anotherItem.equals("no")) {
+				addItem = false;
+				
+			}
 		}
 		Order order = orderDAO.create(new Order(customer_id, item_id));
 		LOGGER.info("Order placed");
@@ -74,13 +79,14 @@ public class OrderController implements CrudController<Order> {
 		while (addItem) {
 			LOGGER.info("Would you like to add an item to the order? ");
 			String addOrNot = utils.getString();
-			if (addOrNot == "yes") {
+			if (addOrNot.equals("yes")) {
 				LOGGER.info("Please enter the item id you would like to add to the order");
 				item_id.add(utils.getLong());
 			} else addItem = false;	
 		}
 		
 		Order order = orderDAO.update(new Order(order_id, customer_id, item_id));
+		
 		LOGGER.info("Order Updated");
 		return order;
 	}
