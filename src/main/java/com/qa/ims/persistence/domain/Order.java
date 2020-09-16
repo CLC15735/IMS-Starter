@@ -12,16 +12,35 @@ public class Order {
 	private Long order_id;
 	private Long customer_id;
 	
+	private String customerName;
+	private List<String> itemName = new ArrayList <>();
+
+	
+	public Order (Long order_id,String customerName, List<String> itemName) {
+		this.order_id = order_id;
+		this.customerName = customerName;
+		this.itemName = itemName;
+		
+	}
+	
+	public Order (Long order_id, Long customer_id) {
+		this.customer_id = customer_id;
+		this.order_id = order_id;
+		
+	}
+	
 	public Order (Long customer_id, List<Long> item_id) {
 		this.customer_id = customer_id;
 		this.item_id = item_id;
 		
 	}
 	
+
 	public Order (Long order_id, Long customer_id, List<Long> item_id) {
 		this.order_id = order_id;
 		this.customer_id = customer_id;
 		this.item_id = item_id;
+	
 		
 	}
 	
@@ -51,11 +70,30 @@ public class Order {
 	}
 	
 	
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+
+	public List<String> getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(List<String> itemName) {
+		this.itemName = itemName;
+	}
+	
+
 	@Override
 	public String toString() {
 		
-		String message = "order ID: " + order_id + " customer reference: " + customer_id + " item id: ";
-		for (Long i : item_id ) {	
+		String message = "order ID: " + order_id + " customer name: " + customerName + " item: ";
+		for (String i : itemName ) {	
 			message += i;
 			}
 			

@@ -130,4 +130,11 @@ public class CustomerDAO implements Dao<Customer> {
 		return 0;
 	}
 
+	@Override
+	public Customer model2(ResultSet resultSet) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

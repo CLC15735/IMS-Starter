@@ -72,23 +72,27 @@ public class OrderController implements CrudController<Order> {
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long order_id = utils.getLong();
+
 		LOGGER.info("Please enter a customer id");
-		Long customer_id = utils.getLong();
-		List<Long> item_id = new ArrayList <>();
+		Long customer_id = utils.getLong();					
+		
 		Boolean addItem = true;
+		List<Long> item_id = new ArrayList <>();
+		String anotherItem = "";
 		while (addItem) {
-			LOGGER.info("Would you like to add an item to the order? ");
-			String addOrNot = utils.getString();
-			if (addOrNot.equals("yes")) {
-				LOGGER.info("Please enter the item id you would like to add to the order");
+			
+			LOGGER.info("Would you like to add an additional item?");
+			anotherItem = utils.getString();
+			if (anotherItem.equals("yes")) {
+				LOGGER.info("Please enter the new item id ");
 				item_id.add(utils.getLong());
-			} else addItem = false;	
+			} else addItem = false;
+						
 		}
-		
-		Order order = orderDAO.update(new Order(order_id, customer_id, item_id));
-		
+		Order order = orderDAO.update (new Order(order_id, customer_id, item_id));		
 		LOGGER.info("Order Updated");
 		return order;
+		
 	}
 	
 	/**

@@ -130,6 +130,13 @@ public class ItemDAO implements Dao<Item> {
 		return 0;
 	}
 
+	@Override
+	public Item model2(ResultSet resultSet) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }
