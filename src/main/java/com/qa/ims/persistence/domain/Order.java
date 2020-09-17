@@ -14,14 +14,18 @@ public class Order {
 	
 	private String customerName;
 	private List<String> itemName = new ArrayList <>();
+	private List<Float> price = new ArrayList <>();
+
 
 	
-	public Order (Long order_id,String customerName, List<String> itemName) {
+	public Order (Long order_id,String customerName, List<String> itemName, List<Float> price) {
 		this.order_id = order_id;
 		this.customerName = customerName;
 		this.itemName = itemName;
+		this.price = price;
 		
 	}
+	
 	
 	public Order (Long order_id, Long customer_id) {
 		this.customer_id = customer_id;
@@ -89,15 +93,30 @@ public class Order {
 	}
 	
 
+	public List<Float> getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(List<Float> price) {
+		this.price = price;
+	}
+
+
 	@Override
 	public String toString() {
 		
+		
 		String message = "order ID: " + order_id + " customer name: " + customerName + " item: ";
-		for (String i : itemName ) {	
-			message += i;
-			}
+		for (int i = 0; i<itemName.size(); i++ ) {	
 			
-		return message;
+			message += itemName.get(i) + " price " + price.get(i) ;
+
+		}
+	
+		
+		return message;	
+		
 	}
 	
 	@Override
@@ -105,8 +124,12 @@ public class Order {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
-		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
+		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		
+		result = prime * result + ((customerName == null) ? 0 : customerName.hashCode());
+		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
 
 		return result;
 	}
@@ -127,16 +150,34 @@ public class Order {
 		} else if (!order_id.equals(other.order_id))
 			return false;
 		
+		if (item_id == null) {
+			if (other.item_id != null)
+				return false;
+		} else if (!item_id.equals(other.item_id))
+			return false;
+		
 		if (customer_id == null) {
 			if (other.customer_id != null)
 				return false;
 		} else if (!customer_id.equals(other.customer_id))
 			return false;
 		
-		if (item_id == null) {
-			if (other.item_id != null)
+		if (customerName == null) {
+			if (other.customerName != null)
 				return false;
-		} else if (!item_id.equals(other.item_id))
+		} else if (!customerName.equals(other.customerName))
+			return false;
+		
+		if (itemName == null) {
+			if (other.itemName != null)
+				return false;
+		} else if (!itemName.equals(other.itemName))
+			return false;
+		
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
 			return false;
 
 		

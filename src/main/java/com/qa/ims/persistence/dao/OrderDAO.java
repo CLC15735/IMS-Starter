@@ -25,7 +25,9 @@ public class OrderDAO implements Dao<Order> {
 		String customerName = resultSet.getString("first_name");
 		List<String> itemName = new ArrayList <>();
 		itemName.add(resultSet.getString("name"));
-		return new Order (order_id, customerName, itemName);
+		List<Float> price = new ArrayList <>();
+		price.add(resultSet.getFloat("price"));
+		return new Order (order_id, customerName, itemName, price);
 	}
 	
 	@Override 
@@ -38,6 +40,7 @@ public class OrderDAO implements Dao<Order> {
 		return new Order (order_id, customer_id, item_id);
 	}
 	
+
 	/**
 	 * Reads all orders from the database matching the customer
 	 * 
@@ -48,8 +51,9 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				//ResultSet resultSet = statement.executeQuery("SELECT o.order_id, o.customer_id, oi.item_id, price FROM orders o JOIN orders_items oi JOIN items ON o.order_id = oi.order_id AND oi.item_id = items.item_id");)
-				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, c.first_name, i.name FROM orders o JOIN customers c JOIN items i JOIN orders_items oi WHERE o.order_id = oi.order_id AND oi.item_id = i.item_id AND c.id = o.customer_id ORDER BY o.order_id");) {
-					List<Order> order = new ArrayList<>();
+				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, c.first_name, i.name, price FROM orders o JOIN customers c JOIN items i JOIN orders_items oi WHERE o.order_id = oi.order_id AND oi.item_id = i.item_id AND c.id = o.customer_id ORDER BY o.order_id");) {
+				
+				List<Order> order = new ArrayList<>();
 						while (resultSet.next()) {
 							order.add(modelFromResultSet(resultSet));
 						}

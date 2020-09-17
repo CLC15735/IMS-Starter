@@ -32,11 +32,23 @@ public class OrderController implements CrudController<Order> {
 	 */
 	@Override
 	public List<Order> readAll() {
+		
 		List<Order> orders = orderDAO.readAll();
-		for (Order order : orders) {
+		
+		for (Order order : orders) {			
 			LOGGER.info(order.toString());
 		}
+		
 		return orders;
+		
+		
+		
+		
+//		List<Order> orders = orderDAO.readAll();
+//		for (Order order : orders) {
+//			LOGGER.info(order.toString());
+//		}
+//		return orders;
 	}
 	
 	/**
@@ -78,10 +90,12 @@ public class OrderController implements CrudController<Order> {
 		
 		Boolean addItem = true;
 		List<Long> item_id = new ArrayList <>();
+	
 		String anotherItem = "";
+		
 		while (addItem) {
 			
-			LOGGER.info("Would you like to add an additional item?");
+			LOGGER.info("Would you like to add another item?");
 			anotherItem = utils.getString();
 			if (anotherItem.equals("yes")) {
 				LOGGER.info("Please enter the new item id ");
