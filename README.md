@@ -1,7 +1,7 @@
 Coverage: 34%
 # Project Title
 
-One Paragraph of project description goes here
+INVENTORY MANAGEMENT SYSTEM
 
 ## Getting Started
 
@@ -9,60 +9,43 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Version Control System: Git
+	-Remote: GitHub
+	-Local: GitBash
 
-```
-Give examples
-```
+Software: Java 7
+Development tools: Eclipse or Maven
+Testing: JUnit
+Database management: MySQL 5.7
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+1. Set up the development environment:
+	- Fork/Clone the dev branch of this repository using GitHub
+2. Set up the connection to your own MySQL database
+	- On src\main\java\com\qa\ims\utils go to DBUtils and change the Username and Password to your own ones
+3. The environement should be all set and ready for a test run in the Runner.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+The tests are performed for customer, order and item for each three of the classes (domain, DAO and controller)
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
-
-```
-Give an example
-```
+The domain tests use EqualsVerifier to determine if the contract for equals and hashCode methods in a class is met.
+The DAO tests use assertEquals(). In this case we feed the DAO the information it requires for a certain task, and the assertEquals method will compare the output with the output expected (created by the user).
+The controller tests use Mockito to verify that the information we are passing on to the DAO is correct.
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
 
-```
-Give an example
-```
 
 ### And coding style tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+
 
 ## Built With
 
@@ -75,6 +58,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+
 
 ## License
 
